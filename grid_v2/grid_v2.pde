@@ -4,7 +4,7 @@ Grid grid;
 
 void setup(){
 	size(400, 400);
-	grid = new Grid(5,5,20, true, "eq"); // type can be column, row, individual
+	grid = new Grid(5,5,20, true, "column"); // type can be column, row, individual
 	
 }
 
@@ -78,12 +78,10 @@ class Grid {
 	void setHoverZones(){
 
 		if(this.sensor_type == "column"){
-			int hover_x = (spacing_x / 2);
-			int old_x;
+			int old_x = (spacing_x / 2);
 			for (int i = 0; i<this.cols + 1; i++){
-				old_x = hover_x;
-				hover_x = hover_x + spacing_x + diameter;
 				line(old_x, 0, old_x, height);
+				old_x = old_x + spacing_x + diameter;
 			}			
 		}else if (this.sensor_type == "individual") {
 			for (int i = 0; i<this.rows; i++){
@@ -95,11 +93,10 @@ class Grid {
 				}
 			}
 		}else if (this.sensor_type == "row") {
-			int myspace = this.spacing_y - (this.diameter / 2);
+			int myspace = (this.spacing_y/2);
 			for (int i = 0; i<this.rows + 1; i++){
 				line(0, myspace, width, myspace);
 				myspace = myspace + this.spacing_y + this.diameter;
-				println(this.spacing_y);
 			}	
 		}
 
@@ -139,7 +136,9 @@ class Lightbulb {
 
 	void isActive(int mx, int my){
 		if(this.selection_type == "column"){
-			if(mx > (this.x - this.padding_x) && mx < (this.x + this.padding_x)){
+			float low_x 	= this.x - (this.diameter/2) - (this.padding_x/2);
+			float high_x 	= this.x + (this.diameter/2) + (this.padding_x/2);
+			if(mx > low_x && mx < high_x){
 				this.highlighted = true;
 			}else{
 				this.highlighted = false;	
@@ -158,7 +157,10 @@ class Lightbulb {
 				this.highlighted = false;	
 			}			
 		}else if(this.selection_type == "row"){
-			if(my > (this.y - this.padding_y) && my < (this.y + this.padding_y)){
+			float low_y 	= this.y - (this.diameter/2) - (this.padding_x/2);
+			float high_y 	= this.y + (this.diameter/2) + (this.padding_x/2);
+
+			if(my > low_y && my < high_y){
 				this.highlighted = true;
 			}else{
 				this.highlighted = false;	
@@ -167,7 +169,6 @@ class Lightbulb {
 			// Determine the hover bounds
 			float low_x 	= this.x - (diameter / 2) - (this.padding_x / 2);
 			float high_x 	= this.x - (diameter / 2) - (this.padding_x / 2) + this.padding_x + this.diameter;
-			// float low_y 	= this.y - (diameter / 2) - (this.padding_y / 2);
 			float high_y 	= this.y - (diameter / 2) - (this.padding_y / 2) + this.padding_y + this.diameter;
 
 			if(mx > low_x && mx < high_x && my < high_y){
