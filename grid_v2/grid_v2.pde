@@ -17,6 +17,18 @@ void draw(){
 
 }
 
+void keyPressed(){
+	if(keyCode == 49){
+		grid.sensor_type = "individual";	
+	}else if (keyCode == 50) {
+		grid.sensor_type = "row";
+	}else if (keyCode == 51) {
+		grid.sensor_type = "eq";
+	}else if (keyCode == 52) {
+		grid.sensor_type = "column";
+	}
+}
+
 class Grid {
 	Lightbulb[][] bulb;
 	int rows, cols, diameter;
@@ -60,18 +72,6 @@ class Grid {
 
 
 		// Change between type
-		if(mousePressed == true){
-			if(this.sensor_type == "column"){
-				this.sensor_type = "individual";	
-			}else if (this.sensor_type == "individual") {
-				this.sensor_type = "row";
-			}else if (this.sensor_type == "row") {
-				this.sensor_type = "eq";
-
-			}else if (this.sensor_type == "eq") {
-				this.sensor_type = "column";
-			}
-		}
 	}
 
 
