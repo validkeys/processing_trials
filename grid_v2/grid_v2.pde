@@ -3,8 +3,8 @@ Grid grid;
 // Click mouse to change between sensor type
 
 void setup(){
-	size(1200, 200);
-	grid = new Grid(4,16,20, true, "eq"); // type can be column, row, individual
+	size(400, 400);
+	grid = new Grid(5,5,20, true, "eq"); // type can be column, row, individual
 	
 }
 
@@ -14,7 +14,7 @@ void draw(){
 	// Vertical Line
 	stroke(255,0,0);
 	line(mouseX, 0, mouseX, height);
-
+	line(0, mouseY, width, mouseY);	
 }
 
 void keyPressed(){
