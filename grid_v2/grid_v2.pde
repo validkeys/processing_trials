@@ -3,8 +3,9 @@ Grid grid;
 // Click mouse to change between sensor type
 
 void setup(){
-	size(400, 400);
-	grid = new Grid(5,5,20, true, "column"); // type can be column, row, individual
+	size(800, 800);
+	// Grid(rows, columns, diameter, debug(true/false), sensor type)
+	grid = new Grid(8,8,20, true, "individual"); // type can be column, row, individual
 	
 }
 
@@ -68,16 +69,12 @@ class Grid {
 		if(debug == true){
 			setHoverZones();
 		}
-
-
-
-		// Change between type
 	}
 
 
 	void setHoverZones(){
 
-		if(this.sensor_type == "column"){
+		if(this.sensor_type == "column" || this.sensor_type == "eq"){
 			int old_x = (spacing_x / 2);
 			for (int i = 0; i<this.cols + 1; i++){
 				line(old_x, 0, old_x, height);
@@ -157,8 +154,8 @@ class Lightbulb {
 				this.highlighted = false;	
 			}			
 		}else if(this.selection_type == "row"){
-			float low_y 	= this.y - (this.diameter/2) - (this.padding_x/2);
-			float high_y 	= this.y + (this.diameter/2) + (this.padding_x/2);
+			float low_y 	= this.y - (this.diameter/2) - (this.padding_y/2);
+			float high_y 	= this.y + (this.diameter/2) + (this.padding_y/2);
 
 			if(my > low_y && my < high_y){
 				this.highlighted = true;
